@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Adnan — Dragon Slayer</title>
+<style>
+:root{--gold:#e9bd69;--red:#c83b2d}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050609;color:#f4eee5;font-family:Georgia,serif}
+button{font:inherit}.hidden{display:none!important}.screen{position:absolute;inset:0}
+#intro{display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;background:radial-gradient(circle at 50% 40%,#4a1710,#170b0c 32%,#050609 76%)}
+.card{width:min(720px,92vw);padding:34px 24px;border:1px solid #a47b43;background:rgba(7,7,10,.9);box-shadow:0 0 70px #000}
+.eyebrow{font:11px Arial,sans-serif;letter-spacing:4px;color:#d5aa60}h1{font-size:clamp(42px,11vw,78px);margin:12px 0;color:var(--gold);text-shadow:0 0 25px #a42d17}
+p{line-height:1.6;color:#d1c7b8}.gold{border:1px solid var(--gold);background:#1b1111;color:#f0cf8b;padding:15px 27px;letter-spacing:2px;touch-action:manipulation}
+#battle{background:linear-gradient(#080b12,#11131a 63%,#09090c);display:flex;flex-direction:column;align-items:center}
+.top{width:min(900px,94vw);padding-top:max(14px,env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;font:11px Arial,sans-serif;letter-spacing:2px;color:#d5c39d;z-index:5}
+.barwrap{width:42%;height:12px;border:1px solid #795c38;background:#160b0c}.bar{height:100%;background:var(--red);transition:width .25s}
+#scene{position:relative;width:min(900px,100vw);height:56vh;min-height:340px;max-height:560px;margin-top:5px;overflow:hidden}
+.moon{position:absolute;width:120px;height:120px;border-radius:50%;right:9%;top:7%;background:#d8d1bc;box-shadow:0 0 45px #aaa48f;opacity:.75}
+.mountain{position:absolute;bottom:0;width:0;height:0;border-left:38vw solid transparent;border-right:38vw solid transparent;border-bottom:28vh solid #0b0d13}.m1{left:-28vw}.m2{right:-28vw;transform:scale(.7)}
+#dragonWrap{position:absolute;width:min(430px,70vw);right:3%;bottom:10%;transition:transform .18s}.hit{animation:hit .3s}
+@keyframes hit{50%{transform:translateX(-10px) rotate(-2deg);filter:brightness(2)}}
+#dragonSvg{width:100%;height:auto;filter:drop-shadow(0 12px 24px #000)}.dragonEye{animation:eye .8s infinite alternate}
+@keyframes eye{to{fill:#fff2a0;filter:drop-shadow(0 0 8px #ff6b00)}}
+#fire{position:absolute;right:20%;top:49%;font-size:25px;opacity:0;pointer-events:none}#fire.show{opacity:1;animation:fire .7s}
+@keyframes fire{0%{transform:scaleX(.2);opacity:0}20%{opacity:1}100%{transform:scaleX(1.4);opacity:0}}
+#player{position:absolute;left:8%;bottom:10%;width:110px;text-align:center}.knight{font-size:78px;filter:drop-shadow(0 8px 5px #000)}
+.swordSlash{position:absolute;left:55px;top:15px;font-size:45px;opacity:0}.attackAnim .swordSlash{animation:slash .35s}
+@keyframes slash{0%{opacity:0;transform:translate(-10px,20px) rotate(-50deg)}40%{opacity:1}100%{opacity:0;transform:translate(55px,-25px) rotate(15deg)}}
+#telegraph{position:absolute;left:50%;top:9%;transform:translateX(-50%);font:bold 16px Arial,sans-serif;letter-spacing:3px;color:#ff7a43;text-shadow:0 0 12px #ff3100;opacity:0;z-index:20}
+#telegraph.show{opacity:1;animation:pulse .45s infinite alternate}@keyframes pulse{to{transform:translateX(-50%) scale(1.08)}}
+#message{height:38px;font:13px Arial,sans-serif;letter-spacing:1.5px;color:#d8cdbb;text-align:center;padding:8px 18px}
+#controls{position:absolute;bottom:max(20px,env(safe-area-inset-bottom));width:min(650px,92vw);display:flex;gap:14px;justify-content:center;z-index:30}
+.action{flex:1;max-width:230px;height:64px;border-radius:8px;border:1px solid #8f6a3d;background:#171114;color:#f1cf88;font:bold 15px Arial,sans-serif;letter-spacing:1px;touch-action:manipulation}
+.action.attack{background:linear-gradient(#5a1713,#2a0d0e);border-color:#c4573c}.action:active{transform:scale(.96)}
+.action:disabled{opacity:.4}.hint{position:absolute;bottom:calc(max(20px,env(safe-area-inset-bottom)) + 72px);font:10px Arial,sans-serif;color:#777;letter-spacing:1px}
+#lose,#win{display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;z-index:100}#lose{background:radial-gradient(circle,#3a110d,#030304 70%)}#win{background:#020203;overflow:hidden}
+#embers{position:absolute;inset:0;width:100%;height:100%}.reveal{position:relative;z-index:3;max-width:850px;padding:20px;opacity:0;animation:appear 1.2s 2.8s forwards}
+@keyframes appear{to{opacity:1}}.reveal h2{font-size:clamp(36px,9vw,82px);color:var(--gold);text-shadow:0 0 30px #e74b1c;margin:12px 0}.wish{font-size:clamp(17px,3vw,25px);line-height:1.75}
+</style></head><body>
+<section id="intro" class="screen"><div class="card"><div class="eyebrow">THE DRAGON'S KEEP</div><h1>ADNAN</h1>
+<p><b>A dragon stands between you and your birthday wish.</b><br>Five strikes. Survive its fire. Become the dragon slayer.</p>
+<p style="font:12px Arial,sans-serif;color:#9d9487">⚔ ATTACK when you are ready<br>🔥 DODGE when the dragon warns you</p>
+<button class="gold" id="start" type="button">ENTER THE KEEP</button></div></section>
+
+<section id="battle" class="screen hidden"><div class="top"><span>DRAGON HP</span><div class="barwrap"><div id="dragonHP" class="bar"></div></div><span id="hearts">❤️❤️❤️❤️❤️</span></div>
+<div id="scene"><div class="moon"></div><div class="mountain m1"></div><div class="mountain m2"></div>
+<div id="telegraph">🔥 FIRE INCOMING — DODGE!</div>
+<div id="dragonWrap"><svg id="dragonSvg" viewBox="0 0 500 330" xmlns="http://www.w3.org/2000/svg" aria-label="large red dragon">
+<defs><linearGradient id="body" x1="0" x2="1"><stop stop-color="#25080b"/><stop offset=".55" stop-color="#8f251b"/><stop offset="1" stop-color="#3b0b0e"/></linearGradient><linearGradient id="wing" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#24090c"/><stop offset="1" stop-color="#7c1d18"/></linearGradient></defs>
+<path d="M75 240Q18 165 58 72Q92 118 160 144Q188 48 260 55Q330 62 356 133Q407 109 466 65Q470 162 403 223Q360 273 277 276L142 277Q102 270 75 240Z" fill="url(#wing)" stroke="#b64a30" stroke-width="4"/>
+<path d="M120 248Q94 158 170 128Q222 105 299 136Q365 162 391 230Q373 290 289 297L174 294Q132 286 120 248Z" fill="url(#body)" stroke="#b64a30" stroke-width="4"/>
+<path d="M292 142Q306 67 381 72Q451 76 465 133Q472 189 417 208Q356 215 320 184Z" fill="#6f1d18" stroke="#c14f31" stroke-width="4"/>
+<path d="M338 77L351 20L373 75M386 76L414 26L421 91" fill="#281b16" stroke="#9b6b42" stroke-width="3"/>
+<circle class="dragonEye" cx="417" cy="119" r="8" fill="#ffb52e"/><path d="M446 158Q482 167 462 184Q439 190 416 179" fill="#1d0608"/>
+<path d="M146 285Q130 315 112 306M206 293Q198 324 180 315M290 294Q292 323 274 317M350 280Q359 311 340 309" fill="none" stroke="#641719" stroke-width="13" stroke-linecap="round"/>
+</svg></div>
+<div id="fire">🔥🔥🔥🔥🔥</div><div id="player"><div class="knight">🛡️⚔️</div><div class="swordSlash">⚔️</div></div></div>
+<div id="message">Strike the dragon five times to win.</div>
+<div id="controls"><button class="action attack" id="attack" type="button">⚔️ ATTACK</button><button class="action" id="dodge" type="button">🔥 DODGE</button></div>
+<div class="hint">The dragon warns you before every fire attack.</div></section>
+
+<section id="lose" class="screen hidden"><div class="card"><div style="font-size:70px">🥥</div><h1 style="text-shadow:none">THENGA.</h1><p>The dragon was not impressed.</p><button class="gold" id="retry" type="button">FIGHT AGAIN</button></div></section>
+<section id="win" class="screen hidden"><canvas id="embers"></canvas><div class="reveal"><div class="eyebrow">THE DRAGON HAS FALLEN</div><h2>HAPPY BIRTHDAY, ADNAN 🔥</h2><div class="wish">YOUR BIRTHDAY MESSAGE GOES HERE.</div><p style="color:#a59a89;font:11px Arial,sans-serif;letter-spacing:2px">YOU DEFEATED THE DRAGON. YOUR REWARD AWAITS.</p></div></section>
+
+<script>
+(()=>{const $=id=>document.getElementById(id);let hp=100,hearts=5,active=false,dodge=false,timer;
+function start(){clearTimeout(timer);$("intro").classList.add("hidden");$("lose").classList.add("hidden");$("win").classList.add("hidden");$("battle").classList.remove("hidden");hp=100;hearts=5;active=true;dodge=false;$("dragonHP").style.width="100%";$("hearts").textContent="❤️❤️❤️❤️❤️";$("message").textContent="Strike the dragon five times to win.";schedule()}
+function schedule(){if(active)timer=setTimeout(warn,1600+Math.random()*900)}
+function warn(){if(!active)return;dodge=true;$("telegraph").classList.add("show");$("message").textContent="DODGE NOW!";setTimeout(()=>{if(!active)return;$("telegraph").classList.remove("show");$("fire").classList.add("show");if(dodge)hit();dodge=false;setTimeout(()=>{$("fire").classList.remove("show");schedule()},650)},850)}
+function hit(){hearts--;$("hearts").textContent="❤️".repeat(Math.max(0,hearts))+"🖤".repeat(5-Math.max(0,hearts));$("message").textContent="THE FIRE GOT YOU!";if(hearts<=0)lose()}
+function attack(){if(!active)return;$("player").classList.remove("attackAnim");void $("player").offsetWidth;$("player").classList.add("attackAnim");$("attack").disabled=true;setTimeout(()=>$("attack").disabled=false,450);hp=Math.max(0,hp-20);$("dragonHP").style.width=hp+"%";$("dragonWrap").classList.remove("hit");void $("dragonWrap").offsetWidth;$("dragonWrap").classList.add("hit");$("message").textContent=hp?"HIT! The dragon is wounded.":"THE DRAGON FALLS...";if(hp<=0)win()}
+function dodgeNow(){if(!active)return;if(dodge){dodge=false;$("telegraph").classList.remove("show");$("message").textContent="PERFECT DODGE."}else $("message").textContent="Wait for the FIRE warning!"}
+function lose(){active=false;clearTimeout(timer);$("battle").classList.add("hidden");$("lose").classList.remove("hidden")}
+function win(){active=false;clearTimeout(timer);$("battle").classList.add("hidden");$("win").classList.remove("hidden");embers()}
+$("start").onclick=start;$("retry").onclick=start;$("attack").onclick=attack;$("dodge").onclick=dodgeNow;
+function embers(){const c=$("embers"),x=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;let p=Array.from({length:380},()=>({x:Math.random()*innerWidth,y:innerHeight+Math.random()*100,vx:(Math.random()-.5)*2.5,vy:-2-Math.random()*6,s:2+Math.random()*7,a:.7+Math.random()*.3}),t0=performance.now());function f(t){x.clearRect(0,0,c.width,c.height);p.forEach(q=>{q.x+=q.vx;q.y+=q.vy;q.vy+=.018;q.a-=.0015;if(q.y<innerHeight*.2||q.a<=0){q.x=Math.random()*innerWidth;q.y=innerHeight+20;q.vy=-2-Math.random()*6;q.a=1}x.globalAlpha=q.a;x.fillStyle=`hsl(${18+Math.random()*40},100%,${50+Math.random()*30}%)`;x.beginPath();x.arc(q.x,q.y,q.s,0,7);x.fill()});if(t-t0<8000)requestAnimationFrame(f)}requestAnimationFrame(f)}
+})()
+</script></body></html>
